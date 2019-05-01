@@ -22,7 +22,7 @@ char *vandermonde(int rows, int cols) {
     return result;
 }
 
-static char *identity(int size) {
+char *identity(int size) {
     char *result = alloc_matrix(size, size);
     for(int i = 0; i < size; i++) {
         for(int j = 0; j < size; j++) {
@@ -61,7 +61,7 @@ char *submatrix(char *matrix, int rows, int cols, int rmin, int rmax, int cmin, 
 }
 
 // Returns the concatenation of this matrix1 and matrix2 on the right.
-static char *concat(char *matrix1, int r1, int c1, char *matrix2, int r2, int c2) {
+char *concat(char *matrix1, int r1, int c1, char *matrix2, int r2, int c2) {
     if(r1 != r2) {
         printf("Cannot concat matrices with different r.\n");
         exit(1);
@@ -93,7 +93,7 @@ char *matrix_mult(char *matrix1, int r1, int c1, char *matrix2, int r2, int c2) 
     return result;
 }
 
-static char *alloc_matrix(int r, int c) {
+char *alloc_matrix(int r, int c) {
     char *result = (char*)malloc(r * c * sizeof(char));
     if(result == NULL) {
         printf("Cannot allocate for matrix.\n");
@@ -102,7 +102,7 @@ static char *alloc_matrix(int r, int c) {
     return result;
 }
 
-static void swap_rows(char *matrix, int rows, int cols, int r1, int r2) {
+void swap_rows(char *matrix, int rows, int cols, int r1, int r2) {
     if(r1 < 0 || rows <= r1 || r2 < 0 || rows <= r2) {
         printf("Row index out of range.\n");
         exit(1);
@@ -114,7 +114,7 @@ static void swap_rows(char *matrix, int rows, int cols, int r1, int r2) {
     }
 }
 
-static void gaussian_elimination(char *matrix, int rows, int columns) {
+void gaussian_elimination(char *matrix, int rows, int columns) {
     if(columns != rows*2) {
         printf("Invalid shape for gaussian elimination.\n");
         exit(1);
