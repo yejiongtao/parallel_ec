@@ -128,15 +128,6 @@ const char EXP_TABLE[] = {
 
 char MULTIPLICATION_TABLE[FIELD_SIZE][FIELD_SIZE];
 
-char multiply_field(char a, char b) {
-    if(a == 0 || b == 0)
-        return 0;
-    int log_a = LOG_TABLE[a & 0xff];
-    int log_b = LOG_TABLE[b & 0xff];
-    int log_result = log_a + log_b;
-    return EXP_TABLE[log_result];
-}
-
 char divide_field(char a, char b) {
     if (a == 0) {
         return 0;

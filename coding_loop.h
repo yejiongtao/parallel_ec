@@ -33,4 +33,34 @@ void input_output_byte_exp_loop(char *matrix_rows, int matrix_r, int matrix_c,
                                 char *outputs, int output_r, int output_c,
                                 int offset, int byte_count);
 
+void input_byte_output_table_loop(char *matrix_rows, int matrix_r, int matrix_c,
+                                  char *inputs, int input_r, int input_c,
+                                  char *outputs, int output_r, int output_c,
+                                  int offset, int byte_count);
+
+void input_byte_output_exp_loop(char *matrix_rows, int matrix_r, int matrix_c,
+                                char *inputs, int input_r, int input_c,
+                                char *outputs, int output_r, int output_c,
+                                int offset, int byte_count);
+
+void byte_input_output_table_loop(char *matrix_rows, int matrix_r, int matrix_c,
+                                  char *inputs, int input_r, int input_c,
+                                  char *outputs, int output_r, int output_c,
+                                  int offset, int byte_count);
+
+void byte_input_output_exp_loop(char *matrix_rows, int matrix_r, int matrix_c,
+                                char *inputs, int input_r, int input_c,
+                                char *outputs, int output_r, int output_c,
+                                int offset, int byte_count);
+
+void byte_output_input_table_loop(char *matrix_rows, int matrix_r, int matrix_c,
+                                  char *inputs, int input_r, int input_c,
+                                  char *outputs, int output_r, int output_c,
+                                  int offset, int byte_count);
+
+void byte_output_input_exp_loop(char *matrix_rows, int matrix_r, int matrix_c,
+                                char *inputs, int input_r, int input_c,
+                                char *outputs, int output_r, int output_c,
+                                int offset, int byte_count);
+
 #endif //PARALLELEC_CODING_LOOP_H

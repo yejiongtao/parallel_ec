@@ -88,11 +88,17 @@ int main() {
     printf("Hello, World!\n");
     init_buffers();
     generate_multiplication_table();
-//    benchmark(output_input_byte_table_loop, "OutputInputByteTable");
-//    benchmark(output_input_byte_exp_loop, "OutputInputByteExp");
-//    benchmark(output_byte_input_table_loop, "OutputByteInputTable");
-//    benchmark(output_byte_input_exp_loop, "OutputByteInputExp");
-    benchmark(input_output_byte_table_loop, "InputOutputByteTable");
+    benchmark(byte_input_output_exp_loop, "ByteInputOutputExp");
+    benchmark(byte_input_output_table_loop, "ByteInputOutputTable");
+    benchmark(byte_output_input_exp_loop, "ByteOutputInputExp");
+    benchmark(byte_output_input_table_loop, "ByteOutputInputTable");
+    benchmark(input_byte_output_exp_loop, "InputByteOutputExp");
+    benchmark(input_byte_output_table_loop, "InputByteOutputTable");
     benchmark(input_output_byte_exp_loop, "InputOutputByteExp");
+    benchmark(input_output_byte_table_loop, "InputOutputByteTable");
+    benchmark(output_byte_input_exp_loop, "OutputByteInputExp");
+    benchmark(output_byte_input_table_loop, "OutputByteInputTable");
+    benchmark(output_input_byte_exp_loop, "OutputInputByteExp");
+    benchmark(output_input_byte_table_loop, "OutputInputByteTable");
     return 0;
 }
