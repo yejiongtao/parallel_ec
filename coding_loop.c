@@ -264,8 +264,8 @@ void byte_output_input_table_loop(char *matrix_rows, int matrix_r, int matrix_c,
                                   int offset, int byte_count) {
     for(int i_byte = offset; i_byte < offset + byte_count; i_byte++) {
         for(int i_output = 0; i_output < output_r; i_output++) {
-            char *output_shard = outputs + i_output * matrix_c;
-            char *matrix_row = matrix_rows + i_output * output_c;
+            char *output_shard = outputs + i_output * output_c;
+            char *matrix_row = matrix_rows + i_output * matrix_c;
             int value = 0;
             for(int i_input = 0; i_input < input_r; i_input++) {
                 char *input_shard = inputs + i_input * input_c;
