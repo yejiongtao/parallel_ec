@@ -4,6 +4,8 @@
 
 #include "coding_loop.h"
 #include "galois.h"
+#include <stdio.h>
+//#include <omp.h>
 
 void output_input_byte_table_loop(char *matrix_rows, int matrix_r, int matrix_c,
                                   char *inputs, int input_r, int input_c,
@@ -293,3 +295,31 @@ void byte_output_input_exp_loop(char *matrix_rows, int matrix_r, int matrix_c,
         }
     }
 }
+
+void output_input_byte_table_threads_loop(char *matrix_rows, int matrix_r, int matrix_c,
+                                  char *inputs, int input_r, int input_c,
+                                  char *outputs, int output_r, int output_c,
+                                  int offset, int byte_count) {
+    for (int i_output = 0; i_output < output_r; i_output++) {
+        char *output_shard = outputs + i_output * output_c;
+        char *matrix_row = matrix_rows + i_output * matrix_c;
+        {
+            int i_input = 0;
+            char *input_shard = inputs + i_input * input_c;
+            char *mult_table_row = MULTIPLICATION_TABLE[matrix_row[i_input] & 0xFF];
+#pragma omp parallel for schedule(static) num_threads(16)
+            // default num_threads on GHC is 16
+            for (int i_byte = offset; i_byte < offset + byte_count; i_byte++) {
+                output_shard[i_byte] = mult_table_row[input_shard[i_byte] & 0xFF];
+            }
+        }
+        for (int i_input = 1; i_input < input_r; i_input++) {
+            char *input_shard = inputs + i_input * input_c;
+            char *mult_table_row = MULTIPLICATION_TABLE[matrix_row[i_input] & 0xFF];
+#pragma omp parallel for schedule(static) num_threads(16)
+            for (int i_byte = offset; i_byte < offset + byte_count; i_byte++)
+                output_shard[i_byte] ^= mult_table_row[input_shard[i_byte] & 0xFF];
+        }
+    }
+}
+

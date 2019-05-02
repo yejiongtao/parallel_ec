@@ -12,15 +12,9 @@
 #define PARITY_COUNT 3
 #define TOTAL_COUNT (DATA_COUNT + PARITY_COUNT)
 #define BUFFER_SIZE (200 * 1000)
-#define PROCESSOR_CACHE (10 * 1024 * 1024)
+#define PROCESSOR_CACHE (20 * 1024 * 1024)
 #define NUM_OF_BUFFERS (PROCESSOR_CACHE * 2 / DATA_COUNT / BUFFER_SIZE + 1)
 
-//const int DATA_COUNT = 17;
-//const int PARITY_COUNT = 3;
-//const int TOTAL_COUNT = DATA_COUNT + PARITY_COUNT;
-//const int BUFFER_SIZE = 200 * 1000;
-//const int PROCESSOR_CACHE = 10 * 1024 * 1024;
-//const int NUM_OF_BUFFERS = PROCESSOR_CACHE * 2 / DATA_COUNT / BUFFER_SIZE + 1;
 const long MEASURE_DURATION = 2 * 1000;     // ms
 int cur_buffer = 0;
 
@@ -107,5 +101,6 @@ int main() {
     benchmark(output_byte_input_table_loop, "OutputByteInputTable");
     benchmark(output_input_byte_exp_loop, "OutputInputByteExp");
     benchmark(output_input_byte_table_loop, "OutputInputByteTable");
+    benchmark(output_input_byte_table_threads_loop, "OutputInputByteTableThreads");
     return 0;
 }
