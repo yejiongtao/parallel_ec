@@ -3,6 +3,7 @@
 //
 
 #include "galois.h"
+#include "cuda_encoder.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -169,4 +170,5 @@ void generate_multiplication_table() {
             MULTIPLICATION_TABLE[a][b] = multiply_field((char) a, (char) b);
         }
     }
+    copy_mult_table_to_cuda();
 }

@@ -8,6 +8,7 @@
 #include "coding_loop.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "cuda_encoder.h"
 
 
 char *matrix = NULL;       // total_shard_count x data_shard_count
@@ -20,12 +21,12 @@ void (*encode_shards)(char *, int, int, char *, int, int,
 void init_rc(int data_shards, int parity_shards,
              void (*coding_loop)(char *, int, int, char *, int, int,
                                  char *, int, int, int, int)) {
+    encode_shards = coding_loop;
     if (matrix != NULL)
-        free(matrix);
+        return;
     data_shard_count = data_shards;
     parity_shard_count = parity_shards;
     total_shard_count = data_shards + parity_shards;
-    encode_shards = coding_loop;
 
     char *vd = vandermonde(total_shard_count, data_shard_count);
     // Multiple by the inverse of the top square of the matrix.
@@ -41,6 +42,8 @@ void init_rc(int data_shards, int parity_shards,
     free(vd);
     free(top);
     free(I);
+
+    init_cuda(parity_rows, parity_shard_count, data_shard_count);
 }
 
 void encode_parity(char *shards, int rows, int cols, int offset, int byte_count) {

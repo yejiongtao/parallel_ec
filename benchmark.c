@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "galois.h"
 #include "coding_loop.h"
+#include "cuda_encoder.h"
 #include "reed_solomon.h"
 #include "cycletimer.h"
 
@@ -102,5 +103,6 @@ int main() {
     benchmark(output_input_byte_exp_loop, "OutputInputByteExp");
     benchmark(output_input_byte_table_loop, "OutputInputByteTable");
     benchmark(output_input_byte_table_threads_loop, "OutputInputByteTableThreads");
+    benchmark(output_input_byte_table_cuda_loop, "OutputInputByteTableCUDA");
     return 0;
 }
